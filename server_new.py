@@ -12,14 +12,15 @@ def send_waiting_messages(wlist1, messages_to_send1):
             messages_to_send1.remove(message)
 
 
+
+IP = '192.168.56.1' # TODO enter here your ip
 server_socket = socket.socket()
-server_socket.bind(("192.168.56.1", 4444))
+server_socket.bind((IP, 4444))
 server_socket.listen(5)
 open_client_sockets = []
 messages_to_send = []
 numberOfClients = 0
 counters = dict()
-
 print 'server is running!! waiting for clients...'
 while True:
     rlist, wlist, xlist = select.select([server_socket] + open_client_sockets, open_client_sockets, [])
@@ -51,15 +52,15 @@ while True:
                 print 'connection with a client is over. numebr of clients is {}\n'.format(str(numberOfClients))
             else:
                 if data == "time":
-                    messages_to_send.append((current_socket, 'the time is:'+str(datetime.now())))
+                    messages_to_send.append((current_socket, 'the time is: '+str(datetime.now())))
                 elif data == "details":
-                    messages_to_send.append((current_socket, 'IP:{}, port:{}'.format("192.168.56.1", "4444")))
-                elif data == "rand":
-                    messages_to_send.append((current_socket, 'your random number is {}'.format(str(random.randint(0, 100)))))
+                    messages_to_send.append((current_socket, 'IP:{}, port:{}'.format(IP, "4444")))
+                elif data == "grade":
+                    messages_to_send.append((current_socket, 'my grade is {}'.format(str(random.randint(0, 100)))))
                 elif data == "name":
-                    messages_to_send.append(current_socket, 'your name is Messi')
+                    messages_to_send.append(current_socket, 'my name is Messi')
                 elif data == "id":
-                    messages_to_send.append(current_socket, 'your id is 000000000')
+                    messages_to_send.append(current_socket, 'my id is 000000000')
                 else:
                     messages_to_send.append((current_socket, 'I do not know what to do with: {}'.format(data)))
 

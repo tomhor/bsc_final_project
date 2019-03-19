@@ -32,7 +32,7 @@ while finish:
     elif server_data == "name":
         client_server.send("my name is {}".format("Messi"))
     elif server_data == "id":
-        client_server.send("my name is 0000000000")
+        client_server.send("my ID is 0000000000")
     elif server_data == "ip":
         client_server.send("my IP is {}".format(IP))
     elif server_data == "mygradeis":
